@@ -27,7 +27,7 @@ public class LoginController {
     public String checkLogin(@RequestParam String username, @RequestParam String password, HttpSession session) {
 
         User user = servr.checkLogin(username);
-
+        System.out.println(user);
         if (user == null) {
             return "error";
         } else {
@@ -35,8 +35,8 @@ public class LoginController {
             session.setAttribute("uid", user.getId());
             session.setAttribute("username", username);
             session.setAttribute("type", user.getUserType().getId());
-//            String dashboard = servr.getDashboard(user.getUserType().getId());
-//            session.setAttribute("dashboard", dashboard);
+            String dashboard = servr.getDashboard(user.getUserType().getId());
+            session.setAttribute("dashboard", dashboard);
 
             return "ok";
 
