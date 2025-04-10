@@ -17,11 +17,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class GetPagesDTO {
-
-    private Integer id;
-    private String dashboard;
-    private String name;
-//    private String dashboard_name;
-    private String allPage;
+public class UserDataTable {
+    
+    public Integer id;
+    public String username;
+    public String name;
+    public String userType;
+    public String modBy;
+    public String modOn;
+    public String status;
+    
 }
+

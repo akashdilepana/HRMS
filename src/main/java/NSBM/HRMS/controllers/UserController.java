@@ -5,6 +5,7 @@
 package NSBM.HRMS.controllers;
 
 import NSBM.HRMS.service.UserService;
+import NSBM.HRMS.model.User;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +19,21 @@ import org.springframework.web.bind.annotation.RestController;
  * @author rusir
  */
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/allusers")
 public class UserController {
     
     @Autowired
     UserService serv;
     
     @GetMapping
-    public List<Map<String, Object>> getAllUsers() {
-       return serv.getAllUsers();
+    public Iterable<User> getAllUsers() {
+        return serv.getAllUsers();
     }
+    
+//    @GetMapping
+//    public List<Map<String, Object>> getAllUsers() {
+//       return serv.getAllUsers();
+//    }
     
     @GetMapping("/{id}")
     public Object getAllUsers(@PathVariable Integer id)throws Exception{

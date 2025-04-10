@@ -14,17 +14,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class PageService {
+
     @Autowired
     PageRepo repo;
 
     public String getPagesForUser(String userId) {
-              // Get pages for the user
+        // Get pages for the user
         String pages = repo.getAllPages(userId);
-        
-        // Print the pages to the console for debugging
-        System.out.println(pages);
+//        System.out.println(pages);
 
-        // Return the pages
         return pages;
     }
 }

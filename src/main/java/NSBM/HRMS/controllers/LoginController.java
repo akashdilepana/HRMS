@@ -27,7 +27,7 @@ public class LoginController {
     public String checkLogin(@RequestParam String username, @RequestParam String password, HttpSession session) {
 
         User user = servr.checkLogin(username);
-        System.out.println(user);
+//        System.out.println(user);
         if (user == null) {
             return "error";
         } else {

@@ -18,23 +18,13 @@ import NSBM.HRMS.dto.GetPagesDTO;
 @Repository
 public interface PageRepo extends CrudRepository<Page, Integer> {
 
-    @Query("WITH RECURSIVE nums AS (SELECT 0 AS n UNION ALL SELECT n + 1 FROM nums WHERE n + 1 < 50),pgs AS (\n"
-            + "SELECT CAST(JSON_UNQUOTE(JSON_EXTRACT(ut.pages, CONCAT('$[', nums.n, ']'))) AS UNSIGNED) AS page_id\n"
-            + "FROM user_type ut JOIN `user` u ON ut.id = u.user_type JOIN nums ON nums.n < JSON_LENGTH(ut.pages) WHERE u.id = :uid),p AS (\n"
-            + "SELECT id, parent FROM pages WHERE id IN (SELECT page_id FROM pgs)\n"
-            + "UNION SELECT pp.id, pp.parent FROM pages pp JOIN p ON pp.id = p.parent)\n"
-            + "SELECT CONCAT('[', GROUP_CONCAT(CONCAT('{','\"name\":\"', l1.name, '\",','\"url\":\"', l1.url, '\",','\"icon\":\"', IFNULL(l1.icon, ''), '\",','\"odr\":', IFNULL(l1.odr, 10000), ',','\"pages\":', '[', IFNULL((\n"
-            + "SELECT GROUP_CONCAT(CONCAT('{','\"name\":\"', l2.name, '\",', '\"url\":\"', l2.url, '\",','\"icon\":\"', IFNULL(l2.icon, ''), '\",','\"odr\":', IFNULL(l2.odr, 10000), ',','\"pages\":', '[', IFNULL((\n"
-            + "SELECT GROUP_CONCAT(CONCAT('{', '\"name\":\"', l3.name, '\",','\"url\":\"', l3.url, '\",','\"icon\":\"', IFNULL(l3.icon, ''), '\",','\"odr\":', IFNULL(l3.odr, 10000), '}')SEPARATOR ', ' )\n"
-            + "FROM pages l3 WHERE l3.level = 3 AND l3.parent = l2.id AND l3.status = 'active' AND l3.id IN (SELECT id FROM p)), ''), ']' ,'}')\n"
-            + "SEPARATOR ', ')FROM pages l2 WHERE l2.level = 2 AND l2.parent = l1.id AND l2.status = 'active' AND l2.id IN (SELECT id FROM p) ), ''), ']','}')\n"
-            + "SEPARATOR ', '), ']') AS pgs FROM pages l1 WHERE l1.level = 1 AND l1.status = 'active' AND l1.id IN (SELECT id FROM p);"
-    )
+    @Query("WITH RECURSIVE pgs AS (SELECT j.page FROM `user_type` ut CROSS JOIN JSON_TABLE(ut.`pages`, '$[*]' COLUMNS (`page` INT PATH '$[0]'))j  WHERE ut.`id`= (SELECT `user_type` FROM `user` WHERE `id`=:uid)), p AS (SELECT `id`,`parent` FROM `pages` WHERE id IN (SELECT page FROM pgs) UNION SELECT pp.`id`,pp.`parent` FROM `pages` pp JOIN p ON pp.`id`=p.parent) "
+            + "SELECT JSON_ARRAYAGG(JSON_OBJECT('name',`name`,'url',`url`,'icon',IFNULL(`icon`,''),'odr',IFNULL(`odr`,10000),'pages',(SELECT JSON_ARRAYAGG(JSON_OBJECT('name',`name`,'url',`url`,'icon',`icon`,'odr',IFNULL(`odr`,10000),'pages',(SELECT JSON_ARRAYAGG(JSON_OBJECT('name',`name`,'url',`url`,'icon',`icon`,'odr',IFNULL(`odr`,10000))) FROM `pages` l3 WHERE `level`=3 AND `parent`=l2.id AND l3.`status`='active' AND l3.`id` IN (SELECT id FROM p)))) FROM `pages` l2 WHERE `level`=2 AND `parent`=l1.`id` AND l2.`status`='active' AND l2.`id` IN (SELECT id FROM p)))) AS pages FROM `pages` l1 WHERE `level`=1 AND `status`='active' AND l1.`id` IN (SELECT id FROM p)")
     String getAllPages(@Param("uid") String uid);
 
     @Query("SELECT (SELECT JSON_ARRAYAGG(JSON_OBJECT( 'odr',`odr`,'id',`id`,'parent',`parent`,'name',`name`,'level',`level`,'url',`url`)) FROM `pages`)as `all_page`")
     GetPagesDTO getPage();
 
-    @Query("SELECT `id`,`name`,`dashboard`,(SELECT `name` FROM `dashboard` WHERE id = u.`dashboard`) AS `dashboard_name`,(SELECT JSON_ARRAYAGG(JSON_OBJECT( 'odr',`odr`,'id',`id`,'parent',`parent`,'name',`name`,'level',`level`,'url',`url`,'state',JSON_OBJECT('selected',IF(a.access IS NULL,CAST(FALSE AS JSON),CAST(TRUE AS JSON))))) FROM `pages` p LEFT JOIN (SELECT j.* FROM `user_type` t CROSS JOIN JSON_TABLE(t.`pages`,'$[*]' COLUMNS(`access` INT path '$[0]'))j WHERE t.`id`=:utid)a ON p.id=a.access)AS `all_page`  FROM `user_type` u WHERE id =:utid")
+    @Query("SELECT `id`,`name`,`dashboard`,(SELECT JSON_ARRAYAGG(JSON_OBJECT( 'odr',`odr`,'id',`id`,'parent',`parent`,'name',`name`,'level',`level`,'url',`url`,'state',JSON_OBJECT('selected',IF(a.access IS NULL,CAST(FALSE AS JSON),CAST(TRUE AS JSON))))) FROM `pages` p LEFT JOIN (SELECT j.* FROM `user_type` t CROSS JOIN JSON_TABLE(t.`pages`,'$[*]' COLUMNS(`access` INT path '$[0]'))j WHERE t.`id`=:utid)a ON p.id=a.access)AS `all_page`  FROM `user_type` u WHERE id =:utid")
     GetPagesDTO getSelectedPage(@Param("utid") Integer utid);
 }
