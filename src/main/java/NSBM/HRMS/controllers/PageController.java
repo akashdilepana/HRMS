@@ -73,4 +73,21 @@ public class PageController {
     public String userType() {
         return "userType";
     }
+    
+    @GetMapping("/att")
+    public String attendance() {
+        return "attendance";
+    }
+    
+    @GetMapping("/sallary")
+    public String sallary() {
+        return "sallary";
+    }
+    
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
+    
+    
 }

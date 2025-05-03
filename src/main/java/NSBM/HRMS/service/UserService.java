@@ -45,4 +45,8 @@ public class UserService {
 //       
 //      return mapper.convertValue(map, User.class);
 //    }
+    public User saveUser(User user) {
+
+        return repo.save(user);
+    }
 }
