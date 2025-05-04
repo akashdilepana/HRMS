@@ -27,7 +27,7 @@
                                     <div class="page-wrapper">
                                         <div class="page-body">
                                             <%-- dont edit above lines--%>
-                                            hi
+                                            hi ama
                                              <%-- dont edit below lines--%>
                                         </div>
                                     </div>
