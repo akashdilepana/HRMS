@@ -28,7 +28,7 @@
                                         <div class="page-body">
 
                                             <div class="row" id="table_sec">
-                                                <div class="col-lg-10 offset-lg-1 col-xl-12 offset-xl-0 col-12">
+                                                <div class="col-lg-10 offset-lg-1 col-xl-8 offset-xl-2 col-12">
                                                     <div class="card">
                                                         <div class="card-header">
                                                             <h6>User Types</h6>

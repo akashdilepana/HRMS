@@ -28,7 +28,7 @@
                     <div class="col-sm-12">
                         <form class="md-float-material form-material">
                             <div class="text-center">
-                                <img src="files/images/fintrex-din-purple.png" width="300" alt="logo.png">
+                                <img src="files/images/summit hrms(black).png" width="300" alt="logo.png">
                             </div>
                             <div class="auth-box card">
                                 <div class="card-block">
