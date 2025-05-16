@@ -34,6 +34,12 @@ public class LoginController {
 
             session.setAttribute("uid", user.getId());
             session.setAttribute("username", username);
+            session.setAttribute("name", user.getName());
+            session.setAttribute("empNo", user.getEmpNo());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("add", user.getAddress());
+            session.setAttribute("mobile", user.getMobile());
+            session.setAttribute("designation", user.getDesignation());
             session.setAttribute("type", user.getUserType().getId());
             String dashboard = servr.getDashboard(user.getUserType().getId());
             session.setAttribute("dashboard", dashboard);

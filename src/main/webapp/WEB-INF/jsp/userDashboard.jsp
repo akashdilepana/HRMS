@@ -185,7 +185,7 @@
         <title>JSP Page</title>
         <%@include file="jspf/header.jspf" %>
 
-        
+
 
     </head>
 
@@ -198,20 +198,32 @@
                 border-radius: 8px;
             }
             .section-box {
-                
+
                 padding: 15px;
                 border-radius: 8px;
                 margin-bottom: 15px;
                 box-shadow: 0 0 5px rgba(0,0,0,0.1);
             }
-            
-            .bg-yellow { background-color: #F7F028; }
-            .bg-orange { background-color: #FCDA53; }
-            .bg-red { background-color: #FC9F53c; }
-            .bg-dred { background-color: #F0432C; }
-            .bg-blue { background-color: #E1FEFB; }
-            .bg-light { background-color: #F7E1FE; }
-            
+
+            .bg-yellow {
+                background-color: #F7F028;
+            }
+            .bg-orange {
+                background-color: #FCDA53;
+            }
+            .bg-red {
+                background-color: #FC9F53c;
+            }
+            .bg-dred {
+                background-color: #F0432C;
+            }
+            .bg-blue {
+                background-color: #E1FEFB;
+            }
+            .bg-light {
+                background-color: #F7E1FE;
+            }
+
             .profile-pic {
                 width: 100px;
                 height: 100px;
@@ -269,13 +281,13 @@
                                                     <!-- Center Column -->
                                                     <div class="col-md-6">
                                                         <div class="profile-card text-center mb-3">
-                                                            <h3>Banula Thisera</h3>
-                                                            <p>Junior Executive - Cashier </p>
+                                                            <h3 name="emp_name" id="emp_name"><%=session.getAttribute("name")%></h3>
+                                                            <p name="emp_des" id="emp_des"><%=session.getAttribute("designation")%></p>
                                                             <img src="files/images/PROFILE1.jpg" class="profile-pic mb-3" alt="User Image">
-                                                            <p><strong>Employee No:</strong> 0001</p>
-                                                            <p><strong>Mobile:</strong> 761574749</p>
-                                                            <p><strong>Email:</strong> banula@summitedge.lk</p>
-                                                            <p><strong>Address:</strong> No.9/5, Maharagama Road, Mampe, Piliyandala, Sri Lanka, Colombo, Western</p>
+                                                            <p><strong>Employee No:</strong><span name="emp_no" id="emp_no"><%=session.getAttribute("empNo")%></span></p>
+                                                            <p><strong>Mobile:</strong><span name="emp_mobile" id="emp_mobile"><%=session.getAttribute("mobile")%></span></p>
+                                                            <p><strong>Email:</strong> <span name="emp_email" id="emp_email"><%=session.getAttribute("email")%></span></p>
+                                                            <p><strong>Address:</strong> <span name="emp_add" id="emp_add"><%=session.getAttribute("add")%></span></p>
                                                         </div>
 
                                                         <div class="section-box">
