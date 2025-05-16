@@ -129,48 +129,48 @@
                 border-radius: 10px;
             }
 
-            .container {
-                width: 500px;
-                margin: 60px auto;
-                padding: 30px;
-                background: #ffffff;
-                box-shadow: 0 0 15px rgba(0,0,0,0.2);
-                border-radius: 12px;
-            }
-            h2 {
-                text-align: center;
-                color: #007bff;
-                margin-bottom: 20px;
-            }
-            label {
-                display: block;
-                margin-top: 12px;
-                font-weight: bold;
-            }
-            input[type="text"], input[type="number"] {
-                width: 100%;
-                padding: 10px;
-                margin-top: 6px;
-                border: 1px solid #ccc;
-                border-radius: 6px;
-                box-sizing: border-box;
-                font-size: 14px;
-            }
-            input[type="submit"] {
-                margin-top: 20px;
-                width: 100%;
-                padding: 12px;
-                background: #007bff;
-                color: white;
-                border: none;
-                font-size: 16px;
-                font-weight: bold;
-                cursor: pointer;
-                border-radius: 8px;
-            }
-            input[type="submit"]:hover {
-                background: #0056b3;
-            }
+            .form-container {
+            width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.15);
+        }
+        h2 {
+            text-align: center;
+            color: #2a41e8;
+            margin-bottom: 25px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+        }
+        input[readonly] {
+            background-color: #f1f1f1;
+        }
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #2a41e8;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1e31b4;
+        }
 
         </style>
         <%@include file="jspf/loader.jspf" %>
@@ -187,32 +187,89 @@
                                     <div class="page-wrapper">
                                         <div class="page-body">
                                             <%-- dont edit above lines--%>
-                                            <div class="container">
-                                                <h2>Salary Entry Sheet</h2>
+                                            
+                                            <script>
+         function calculateSalary() {
+             let basic = parseFloat(document.getElementById("basic").value) || 0;
+             let allowance = parseFloat(document.getElementById("allowance").value) || 0;
+             let deduct = parseFloat(document.getElementById("deduct").value) || 0;
+
+             let total = basic + allowance;
+             let net = total - deduct;
+
+             document.getElementById("total").value = total.toFixed(2);
+             document.getElementById("net").value = net.toFixed(2);
+         }
+                                            </script>
+                                        
+                                                
+                                            <div class="form-container">
+                                                <h2>Add Salary Details</h2>
+                                                
+                                                <div style="display: flex; justify-content: space-between; gap: 20px;">
+                                                    <div style="flex: 1;">
+                                                        <label>Added Date</label>
+                                                        <input type="date" name="addedDate" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+                                                    </div>
+
+                                                    <div style="flex: 1;">
+                                                        <label>Salary Year</label>
+                                                        <select name="year" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+                                                            <option value="2025">2025</option>
+                                                            <option value="2024">2024</option>
+                                                            <option value="2023">2023</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div style="flex: 1;">
+                                                        <label>Salary Month</label>
+                                                        <select name="month" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+                                                            <option value="January">January</option>
+                                                            <option value="February">February</option>
+                                                            <option value="March">March</option>
+                                                            <option value="April">April</option>
+                                                            <option value="May">May</option>
+                                                            <option value="June">June</option>
+                                                            <option value="July">July</option>
+                                                            <option value="August">August</option>
+                                                            <option value="September">September</option>
+                                                            <option value="October">October</option>
+                                                            <option value="November">November</option>
+                                                            <option value="December">December</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
                                                 <form action="AddSalaryServlet" method="post">
-                                                    <label for="empId">Employee ID:</label>
-                                                    <input type="text" id="empId" name="empId" required>
+                                                    <label>Employee ID</label>
+                                                    <input type="text" name="empId" required>
 
-                                                    <label for="empName">Employee Name:</label>
-                                                    <input type="text" id="empName" name="empName" required>
+                                                    <label>Employee Name</label>
+                                                    <input type="text" name="empName" required>
 
-                                                    <label for="designation">Designation:</label>
-                                                    <input type="text" id="designation" name="designation" required>
+                                                    <label>Designation / Job Title</label>
+                                                    <input type="text" name="designation" required>
 
-                                                    <label for="basicSalary">Basic Salary:</label>
-                                                    <input type="number" id="basicSalary" name="basicSalary" required>
+                                                    <label>Basic Salary</label>
+                                                    <input type="number" name="basic" id="basic" oninput="calculateSalary()" required>
 
-                                                    <label for="allowance">Allowance:</label>
-                                                    <input type="number" id="allowance" name="allowance" required>
+                                                    <label>Allowances</label>
+                                                    <input type="number" name="allowance" id="allowance" oninput="calculateSalary()" required>
 
-                                                    <label for="deductions">Deductions:</label>
-                                                    <input type="number" id="deductions" name="deductions" required>
+                                                    <label>Total Salary</label>
+                                                    <input type="number" name="total" id="total" readonly>
 
-                                                    <input type="submit" value="Add Salary">
+                                                    <label>Deductions</label>
+                                                    <input type="number" name="deduct" id="deduct" oninput="calculateSalary()">
+
+                                                    <label>Net Salary</label>
+                                                    <input type="number" name="net" id="net" readonly>
+
+                                                    <button type="submit">💾 Save Salary Entry</button>
                                                 </form>
+
                                             </div>
-
-
 
                                             <%-- dont edit below lines--%>
                                         </div>
