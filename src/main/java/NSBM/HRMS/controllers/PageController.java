@@ -89,6 +89,11 @@ public class PageController {
         return "sallarySheet";
     }
     
+    @GetMapping("/enter_sallary")
+    public String enterSallary() {
+        return "enterSalary";
+    }
+    
     @GetMapping("/test")
     public String test() {
         return "test";
