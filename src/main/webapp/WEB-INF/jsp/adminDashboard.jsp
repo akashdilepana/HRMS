@@ -223,7 +223,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="section-box" onclick="location.href='salary.jsp'">
+                                                        <div class="section-box" onclick="location.href='sallary'">
                                                             <i class="fa fa-money"></i><br>
                                                             <strong>Salary</strong>
                                                         </div>
