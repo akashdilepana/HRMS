@@ -259,17 +259,18 @@
                                                         <div class="section-box bg-orange">
                                                             <h5><b>My Suggestions</b> </h5>
                                                             <br>
-                                                            <form>
+                                                            <div id="formSection">
                                                                 <div class="form-group">
                                                                     <label>Idea</label>
-                                                                    <input type="text" class="form-control">
+                                                                    <input type="text" name="idea" id="idea" class="form-control">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label>Employee ID</label>
-                                                                    <input type="text" class="form-control">
+                                                                    <label>Employee No</label>
+                                                                    <input type="text" name="empNo" id="empNo" class="form-control">
                                                                 </div>
-                                                                <button type="submit" class="btn btn-success btn-sm">+ Add</button>
-                                                            </form>
+                                                                <button  id="savebtn" class="btn btn-success btn-sm">+ Add</button>
+
+                                                            </div>
                                                         </div>
                                                         <div class="section-box">
                                                             <h5>Intranet Links</h5>
@@ -293,13 +294,8 @@
                                                         <div class="section-box">
                                                             <h5>Welcome Aboard</h5>
                                                             <br>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width:50px; height:50px;">HK</div>
-                                                                <div class="ml-3">
-                                                                    <strong>Hashan Kavishka</strong><br>
-                                                                    Executive - Credit Marketing<br>
-                                                                    <small>Joined Date: 3 April 2025</small>
-                                                                </div>
+                                                            <div id="newEmpWelcome">
+
                                                             </div>
                                                         </div>
 
@@ -359,5 +355,84 @@
         <script type="text/javascript" src="files/js/func.js"></script>
         <script type="text/javascript" src="files/js/autoNumeric.js"></script>
         <script type="text/javascript" src="files/js/dataTables.responsive.min.js"></script>
+        <script>
+            fetch('dashboard/new-emp')
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data && Array.isArray(data)) {
+                            $('#newEmpWelcome').html('');
+                            data.forEach(emp => {
+                                const temp = '<div class="d-flex align-items-center mb-3">'
+                                        + '<div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width:50px; height:50px;">'
+                                        + '</div>'
+                                        + '<div class="ml-3">'
+                                        + '<strong>' + emp.name + '</strong><br>'
+                                        + emp.designation + ' - ' + emp.department + '<br>'
+                                        + '<small>Joined Date: ' + emp.entDate + '</small>'
+                                        + '</div>'
+                                        + '</div>'
+                                $('#newEmpWelcome').append(temp);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching new employees:', error);
+                    });
+
+
+
+
+            $('#savebtn').click(function () {
+                if ($('#idea').val().trim() === '') {
+                    Swal.fire("Empty Idea!", "Please Enter a Valid Idea!", "warning");
+                    return;
+                }
+                if ($('#empNo').val().trim() === '') {
+                    Swal.fire("Empty Employee No!", "Please Enter a Valid Employee No!", "warning");
+                    return;
+                }
+
+
+                const formData = new FormData();
+                formData.append('idea', $('#idea').val().trim());
+                formData.append('empNo', $('#empNo').val().trim());
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Your Idea Will be save !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Continue!',
+                    showLoaderOnConfirm: true,
+                    searchHighlight: true,
+                    preConfirm: () => {
+                        return fetch('dashboard/save-idea', {
+                            method: 'post',
+                            body: formData
+                        }).then(response => {
+                            if (!response.ok) {
+                                throw new Error(response.statusText);
+                            }
+                            return response.json();
+                        }).catch(error => {
+                            Swal.showValidationMessage('Request failed:' + error);
+                        });
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+
+                }).then((result) => {
+                    if (result.value) {
+                        if (result.value.status !== 200) {
+                            Swal.fire('Error!', result.value.msg, 'error');
+                        } else {
+                            Swal.fire('Successfull!', 'Your Idea has been updated.', 'success');
+                            $('#formSection').find('input[type!=search]').val('')
+                        }
+                    }
+                });
+            });
+
+        </script>
     </body>
 </html>
