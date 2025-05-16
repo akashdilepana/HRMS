@@ -14,6 +14,7 @@ import NSBM.HRMS.dto.UserTypeDataTable;
 import NSBM.HRMS.repo.PageRepo;
 import NSBM.HRMS.model.UserType;
 import NSBM.HRMS.model.User;
+import NSBM.HRMS.repo.UserDesignationRepo;
 import NSBM.HRMS.repo.UserRepo;
 import NSBM.HRMS.repo.UserTypeRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,6 +39,9 @@ public class AdminService {
 
     @Autowired
     UserRepo userRepo;
+    
+    @Autowired
+    UserDesignationRepo userDesignationRepo;
 
     @Autowired
     private DataTableRepo<UserDataTable> userDt;
@@ -160,5 +164,8 @@ public class AdminService {
 
     public Iterable<SlimSelectDTO> getUserTypeIdAndName(String search) {
         return userTypeRepo.getIdAndName("%" + search.trim() + "%");
+    }
+    public Iterable<SlimSelectDTO> getUserDesignationIdAndName(String search) {
+        return userDesignationRepo.getIdAndName("%" + search.trim() + "%");
     }
 }

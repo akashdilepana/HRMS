@@ -104,6 +104,13 @@
                                                                                 </select>
                                                                             </div>
                                                                         </div>  
+                                                                        <div class="col-lg-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="user_designation">Designation<span class="text-danger">*</span></label>
+                                                                                <select id="user_designation" name="user_designation" class="" required autocomplete="off">
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -232,6 +239,22 @@
 
                 ajax: function (search, callback) {
                     fetch('admin/search-user-types', {
+                        method: 'POST',
+                        body: new URLSearchParams({search: search || ''})
+                    }).then(res => res.json()).then((data) => {
+                        callback(data);
+                    });
+                },
+                allowDeselect: true,
+                deselectLabel: '<span class="red">✖</span>'
+            });
+            var user_designation = new SlimSelect({
+                select: '#user_designation',
+                placeholder: "Select user designation",
+                searchHighlight: true,
+
+                ajax: function (search, callback) {
+                    fetch('admin/search-user-designation', {
                         method: 'POST',
                         body: new URLSearchParams({search: search || ''})
                     }).then(res => res.json()).then((data) => {
