@@ -82,16 +82,36 @@ public class PageController {
     @GetMapping("/sallary")
     public String sallary() {
         return "sallary";
+
+    @GetMapping("/salarySlip")
+    public String sallarySlip() {
+        return "salary";
+    }
+    
+    @GetMapping("/salarySheet")
+    public String sallarySheet() {
+        return "salarySheet";
+    }
+    
+    @GetMapping("/enter_sallary")
+    public String enterSallary() {
+        return "enterSalary";
+
+    @GetMapping("/sallary")
+    public String sallary() {
+
     }
     
     @GetMapping("/test")
     public String test() {
         return "test";
     }
+
     @GetMapping("/leave")
     public String leave() {
         return "leave";
     }
+
     
     
 }
