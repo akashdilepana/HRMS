@@ -68,40 +68,32 @@ public class PageController {
     public String users() {
         return "user";
     }
-    
+
     @GetMapping("/user_type")
     public String userType() {
         return "userType";
     }
-    
+
     @GetMapping("/att")
     public String attendance() {
         return "attendance";
     }
-    
-    @GetMapping("/sallary")
-    public String sallary() {
-        return "sallary";
 
     @GetMapping("/salarySlip")
     public String sallarySlip() {
         return "salary";
     }
-    
+
     @GetMapping("/salarySheet")
     public String sallarySheet() {
         return "salarySheet";
     }
-    
-    @GetMapping("/enter_sallary")
-    public String enterSallary() {
+
+    @GetMapping("/enter_salary")
+    public String enterSalary() {
         return "enterSalary";
-
-    @GetMapping("/sallary")
-    public String sallary() {
-
     }
-    
+
     @GetMapping("/test")
     public String test() {
         return "test";
@@ -111,7 +103,4 @@ public class PageController {
     public String leave() {
         return "leave";
     }
-
-    
-    
 }
