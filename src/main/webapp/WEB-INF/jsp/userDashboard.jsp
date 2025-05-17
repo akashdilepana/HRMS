@@ -205,8 +205,8 @@
                 box-shadow: 0 0 5px rgba(0,0,0,0.1);
             }
 
-            .bg-yellow {
-                background-color: #F7F028;
+            .bg-pink {
+                background-color: #FADADD;
             }
             .bg-orange {
                 background-color: #FCDA53;
@@ -218,10 +218,13 @@
                 background-color: #F0432C;
             }
             .bg-blue {
-                background-color: #E1FEFB;
+                background-color: #DDEBF7;
             }
             .bg-light {
                 background-color: #F7E1FE;
+            }
+            .bg-teal {
+                background-color: #A3D5D3;
             }
 
             .profile-pic {
@@ -251,12 +254,12 @@
                                                 <div class="row">
                                                     <!-- Left Column -->
                                                     <div class="col-md-3">
-                                                        <div class="section-box bg-dred">
+                                                        <div class="section-box bg-teal">
                                                             <h5><b>Daily Quote</b></h5>
                                                             <br>
                                                             <p>"An eye for an eye only ends up making the whole world blind."<br><strong>- M.K. Gandhi -</strong></p>
                                                         </div>
-                                                        <div class="section-box bg-orange">
+                                                        <div class="section-box bg-pink">
                                                             <h5><b>My Suggestions</b> </h5>
                                                             <br>
                                                             <div id="formSection">
@@ -272,7 +275,7 @@
 
                                                             </div>
                                                         </div>
-                                                        <div class="section-box">
+                                                        <div class="section-box bg-teal">
                                                             <h5>Intranet Links</h5>
                                                             <br>
                                                             <p>&lt;&gt;</p>
@@ -295,6 +298,7 @@
                                                             <h5>Welcome Aboard</h5>
                                                             <br>
                                                             <div id="newEmpWelcome">
+                                                                show new employee name and designation
 
                                                             </div>
                                                         </div>
@@ -315,12 +319,12 @@
 
                                                     <!-- Right Column -->
                                                     <div class="col-md-3">
-                                                        <div class="section-box">
+                                                        <div class="section-box bg-teal">
                                                             <h5><b>My Workflow Items</b></h5>
                                                             <br>
                                                             <p>You don't have any pending approvals for now</p>
                                                         </div>
-                                                        <div class="section-box bg-orange">
+                                                        <div class="section-box bg-pink">
                                                             <h5><b>Company News</b></h5>
                                                             <br>
                                                             <ul class="list-unstyled">
@@ -331,7 +335,7 @@
                                                                 <li><strong>01 MAY 2025</strong><br>summit Core Values<br><small>Our customers need to trust us... <a href="#">More</a></small></li>
                                                             </ul>
                                                         </div>
-                                                        <div class="section-box bg-dred">
+                                                        <div class="section-box bg-teal">
                                                             <h5>Employee Directory</h5>
                                                             <br>
                                                             <input type="text" class="form-control" placeholder="Search by name, role, or ID">

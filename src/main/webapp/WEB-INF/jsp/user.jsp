@@ -72,7 +72,7 @@
                                                 <div class="col-lg-8 offset-lg-2 col-12">
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <h6>Add/Update Users</h6>
+                                                            <h6>Add User</h6>
                                                             <div class="card-header-right">
                                                                 <ul class="list-unstyled card-option">
                                                                     <li><i class="feather icon-x cls-card"></i></li>
@@ -94,6 +94,36 @@
                                                                             <div class="form-group">
                                                                                 <label for="username">Username<span class="text-danger">*</span></label>
                                                                                 <input id="username"  type="text" name="username" class="form-control" required autocomplete="off">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="address">Address<span class="text-danger">*</span></label>
+                                                                                <input id="add" type="text" name="add" class="form-control"  required autocomplete="off">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="email">Email<span class="text-danger">*</span></label>
+                                                                                <input id="email" type="text" name="email" class="form-control"  required autocomplete="off">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="Contact">Contact Number<span class="text-danger">*</span></label>
+                                                                                <input id="tp" type="text" name="tp" class="form-control"  required autocomplete="off">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="password">Password<span class="text-danger">*</span></label>
+                                                                                <input id="pw" type="text" name="pw" class="form-control"  required autocomplete="off">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="empNumber">Employee Number<span class="text-danger">*</span></label>
+                                                                                <input id="emp" type="text" name="emp" class="form-control"  required autocomplete="off">
                                                                             </div>
                                                                         </div>
 
