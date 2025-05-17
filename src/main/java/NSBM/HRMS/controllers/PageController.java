@@ -79,17 +79,17 @@ public class PageController {
         return "attendance";
     }
     
-    @GetMapping("/sallarySlip")
+    @GetMapping("/salarySlip")
     public String sallarySlip() {
-        return "sallary";
+        return "salary";
     }
     
-    @GetMapping("/sallarySheet")
+    @GetMapping("/salarySheet")
     public String sallarySheet() {
-        return "sallarySheet";
+        return "salarySheet";
     }
     
-    @GetMapping("/enter_sallary")
+    @GetMapping("/enter_salary")
     public String enterSallary() {
         return "enterSalary";
     }

@@ -130,47 +130,47 @@
             }
 
             .form-container {
-            width: 600px;
-            margin: auto;
-            background: #fff;
-            padding: 25px 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.15);
-        }
-        h2 {
-            text-align: center;
-            color: #2a41e8;
-            margin-bottom: 25px;
-        }
-        label {
-            font-weight: bold;
-            display: block;
-            margin-top: 15px;
-        }
-        input[type="text"], input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            margin-top: 5px;
-        }
-        input[readonly] {
-            background-color: #f1f1f1;
-        }
-        button {
-            margin-top: 25px;
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            background-color: #2a41e8;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #1e31b4;
-        }
+                width: 600px;
+                margin: auto;
+                background: #fff;
+                padding: 25px 30px;
+                border-radius: 12px;
+                box-shadow: 0 0 12px rgba(0,0,0,0.15);
+            }
+            h2 {
+                text-align: center;
+                color: #2a41e8;
+                margin-bottom: 25px;
+            }
+            label {
+                font-weight: bold;
+                display: block;
+                margin-top: 15px;
+            }
+            input[type="text"], input[type="number"] {
+                width: 100%;
+                padding: 10px;
+                border-radius: 8px;
+                border: 1px solid #ccc;
+                margin-top: 5px;
+            }
+            input[readonly] {
+                background-color: #f1f1f1;
+            }
+            button {
+                margin-top: 25px;
+                width: 100%;
+                padding: 12px;
+                font-size: 16px;
+                background-color: #2a41e8;
+                color: white;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #1e31b4;
+            }
 
         </style>
         <%@include file="jspf/loader.jspf" %>
@@ -189,13 +189,14 @@
                                             <%-- dont edit above lines--%>
 
                                             <script>
-         function calculateSalary() {
-             let basic = parseFloat(document.getElementById("basic").value) || 0;
-             let allowance = parseFloat(document.getElementById("allowance").value) || 0;
-             let deduct = parseFloat(document.getElementById("deduct").value) || 0;
+                                                function calculateSalary() {
+                                                    let basic = parseFloat(document.getElementById("basic").value) || 0;
+                                                    let allowance = parseFloat(document.getElementById("allowance").value) || 0;
+                                                    let deduct = parseFloat(document.getElementById("deduct").value) || 0;
 
-             let total = basic + allowance;
-             let net = total - deduct;
+                                                    let total = basic + allowance;
+                                                    let net = total - deduct;
+
 
              document.getElementById("total").value = total.toFixed(2);
              document.getElementById("net").value = net.toFixed(2);
@@ -235,11 +236,17 @@
     }
 
 
+
+                                                    document.getElementById("total").value = total.toFixed(2);
+                                                    document.getElementById("net").value = net.toFixed(2);
+                                                }
+
                                             </script>
 
 
                                             <div class="form-container">
                                                 <h2>Add Salary Details</h2>
+
 
 
                                                 <hr style="margin: 20px 0;">
@@ -249,6 +256,12 @@
                                                     <div style="flex: 2;">
                                                         <label>Search by Employee ID</label>
                                                         <input type="text" id="searchEmpId" placeholder="Enter ID to search...">
+
+                                                <div style="display: flex; justify-content: space-between; gap: 20px;">
+                                                    <div style="flex: 1;">
+                                                        <label>Added Date</label>
+                                                        <input type="date" name="addedDate" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+
                                                     </div>
                                                     <div style="flex: 1; display: flex; align-items: flex-direction: column; gap: 10px; width: fit-content; end;">
                                                         <button 
