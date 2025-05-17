@@ -187,7 +187,7 @@
                                     <div class="page-wrapper">
                                         <div class="page-body">
                                             <%-- dont edit above lines--%>
-                                            
+
                                             <script>
          function calculateSalary() {
              let basic = parseFloat(document.getElementById("basic").value) || 0;
@@ -200,76 +200,149 @@
              document.getElementById("total").value = total.toFixed(2);
              document.getElementById("net").value = net.toFixed(2);
          }
+         
+    function fetchEmployeeDetails() {
+        const empId = document.getElementById("searchEmpId").value.trim();
+
+        if (empId === "") {
+            alert("Please enter an Employee ID");
+            return;
+        }
+
+        // Example static data (replace with real AJAX call or DB data)
+        const dummyDatabase = {
+            "101": "Kamal Perera",
+            "102": "Nimal Silva",
+            "103": "Sunil Fernando"
+        };
+
+        const nameField = document.getElementById("employeeName");
+        const detailsDiv = document.getElementById("employeeDetails");
+
+        if (dummyDatabase[empId]) {
+            nameField.value = dummyDatabase[empId];
+            nameField.readOnly = true;
+            detailsDiv.style.display = "block";
+        } else {
+            alert("Employee not found!");
+            detailsDiv.style.display = "none";
+        }
+    }
+
+    function enableEdit() {
+        document.getElementById("employeeName").readOnly = false;
+        document.getElementById("employeeName").focus();
+    }
+
+
                                             </script>
-                                        
-                                                
+
+
                                             <div class="form-container">
                                                 <h2>Add Salary Details</h2>
-                                                
-                                                <div style="display: flex; justify-content: space-between; gap: 20px;">
-                                                    <div style="flex: 1;">
-                                                        <label>Added Date</label>
-                                                        <input type="date" name="addedDate" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+
+
+                                                <hr style="margin: 20px 0;">
+
+                                                <h6><b>🔍 Search Another Employee</b></h6>
+                                                <div class="row-group">
+                                                    <div style="flex: 2;">
+                                                        <label>Search by Employee ID</label>
+                                                        <input type="text" id="searchEmpId" placeholder="Enter ID to search...">
                                                     </div>
+                                                    <div style="flex: 1; display: flex; align-items: flex-direction: column; gap: 10px; width: fit-content; end;">
+                                                        <button 
+                                                            type="button" 
+                                                            onclick="fetchEmployeeDetails()"
+                                                            style="padding: 4px 8px; font-size: 14px; background-color: #008bff; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100px;"
+                                                            >
+                                                            🔍 Search 
+                                                        </button>
+                                                        <br> 
+                                                        <br>
+                                                        <div style="flex: 2; display: flex; align-items: end;">
+                                                            <button 
+                                                                type="button" 
+                                                                onclick="enableEdit()"
+                                                                style="padding: 4px 8px; font-size: 14px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; width: 100px;"
+                                                                >
+                                                                ✏️ Edit
 
-                                                    <div style="flex: 1;">
-                                                        <label>Salary Year</label>
-                                                        <select name="year" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
-                                                            <option value="2025">2025</option>
-                                                            <option value="2024">2024</option>
-                                                            <option value="2023">2023</option>
-                                                        </select>
+                                                        </div>
                                                     </div>
+                                                    <br>
 
-                                                    <div style="flex: 1;">
-                                                        <label>Salary Month</label>
-                                                        <select name="month" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
-                                                            <option value="January">January</option>
-                                                            <option value="February">February</option>
-                                                            <option value="March">March</option>
-                                                            <option value="April">April</option>
-                                                            <option value="May">May</option>
-                                                            <option value="June">June</option>
-                                                            <option value="July">July</option>
-                                                            <option value="August">August</option>
-                                                            <option value="September">September</option>
-                                                            <option value="October">October</option>
-                                                            <option value="November">November</option>
-                                                            <option value="December">December</option>
-                                                        </select>
+                                                    <hr style="margin: 20px 0;">
+
+                                                    <h6><b>➕ Add New Employee</b></h6>
+                                                    <br>
+
+
+                                                    <div>
+                                                        <div style="display: flex; justify-content: space-between; gap: 20px;">
+                                                            <div style="flex: 1;">
+                                                                <label>Added Date</label>
+                                                                <input type="date" name="addedDate" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+                                                            </div>
+
+                                                            <div style="flex: 1;">
+                                                                <label>Salary Year</label>
+                                                                <select name="year" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+                                                                    <option value="2025">2025</option>
+                                                                    <option value="2024">2024</option>
+                                                                    <option value="2023">2023</option>
+                                                                </select>
+                                                            </div>
+
+                                                            <div style="flex: 1;">
+                                                                <label>Salary Month</label>
+                                                                <select name="month" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+                                                                    <option value="January">January</option>
+                                                                    <option value="February">February</option>
+                                                                    <option value="March">March</option>
+                                                                    <option value="April">April</option>
+                                                                    <option value="May">May</option>
+                                                                    <option value="June">June</option>
+                                                                    <option value="July">July</option>
+                                                                    <option value="August">August</option>
+                                                                    <option value="September">September</option>
+                                                                    <option value="October">October</option>
+                                                                    <option value="November">November</option>
+                                                                    <option value="December">December</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <form action="AddSalaryServlet" method="post">
+                                                            <label>Employee ID</label>
+                                                            <input type="text" name="empId" required>
+
+                                                            <label>Employee Name</label>
+                                                            <input type="text" name="empName" required>
+
+                                                            <label>Designation / Job Title</label>
+                                                            <input type="text" name="designation" required>
+
+                                                            <label>Basic Salary</label>
+                                                            <input type="number" name="basic" id="basic" oninput="calculateSalary()" required>
+
+                                                            <label>Allowances</label>
+                                                            <input type="number" name="allowance" id="allowance" oninput="calculateSalary()" required>
+
+                                                            <label>Total Salary</label>
+                                                            <input type="number" name="total" id="total" readonly>
+
+                                                            <label>Deductions</label>
+                                                            <input type="number" name="deduct" id="deduct" oninput="calculateSalary()">
+
+                                                            <label>Net Salary</label>
+                                                            <input type="number" name="net" id="net" readonly>
+
+                                                            <button type="submit">💾 Save Salary Entry</button>
+                                                        </form>
+
                                                     </div>
-                                                </div>
-
-
-                                                <form action="AddSalaryServlet" method="post">
-                                                    <label>Employee ID</label>
-                                                    <input type="text" name="empId" required>
-
-                                                    <label>Employee Name</label>
-                                                    <input type="text" name="empName" required>
-
-                                                    <label>Designation / Job Title</label>
-                                                    <input type="text" name="designation" required>
-
-                                                    <label>Basic Salary</label>
-                                                    <input type="number" name="basic" id="basic" oninput="calculateSalary()" required>
-
-                                                    <label>Allowances</label>
-                                                    <input type="number" name="allowance" id="allowance" oninput="calculateSalary()" required>
-
-                                                    <label>Total Salary</label>
-                                                    <input type="number" name="total" id="total" readonly>
-
-                                                    <label>Deductions</label>
-                                                    <input type="number" name="deduct" id="deduct" oninput="calculateSalary()">
-
-                                                    <label>Net Salary</label>
-                                                    <input type="number" name="net" id="net" readonly>
-
-                                                    <button type="submit">💾 Save Salary Entry</button>
-                                                </form>
-
-                                            </div>
 
                                             <%-- dont edit below lines--%>
                                         </div>
