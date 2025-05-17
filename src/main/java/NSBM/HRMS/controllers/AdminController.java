@@ -125,4 +125,8 @@ public class AdminController {
     public Iterable<SlimSelectDTO> searchUserTypes(@RequestParam String search) throws Exception {
         return service.getUserTypeIdAndName(search);
     }
+    @PostMapping("/search-user-designation")
+    public Iterable<SlimSelectDTO> searchUserDesignation(@RequestParam String search) throws Exception {
+        return service.getUserDesignationIdAndName(search);
+    }
 }

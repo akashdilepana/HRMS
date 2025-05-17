@@ -10,14 +10,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Table;
 
 /**
@@ -28,33 +25,16 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @Setter
 @Getter
-@ToString
-@Table("user")
-public class User {
+@Table("user_designation")
+public class UserDesignation {
 
     @Id
     private Integer id;
-    private String username;
     private String name;
-    private String email;
-    private String address;
-    private String mobile;
-    private String designation;
-    private String empNo;
-    private AggregateReference<UserType, Integer> userType;
-    @Transient
-    private String userTypeName;
-    @CreatedBy
-    private Integer entBy;
-    @CreatedDate
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
-    private Date entOn;
-    @LastModifiedBy
-    private Integer modBy;
-    @LastModifiedDate
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss")
-    private Date modOn;
-    private String status;
-    private String password;
+    
+    
+
+    
 
 }
+

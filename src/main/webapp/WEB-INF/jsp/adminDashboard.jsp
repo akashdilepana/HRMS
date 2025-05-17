@@ -237,7 +237,7 @@
                                                     <div class="col-md-2">
                                                         <div class="section-box" onclick="location.href='ticketChecking.jsp'">
                                                             <i class="fa fa-ticket"></i><br>
-                                                            <strong>Ticket Checking</strong>
+                                                            <strong>Suggestions</strong>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
