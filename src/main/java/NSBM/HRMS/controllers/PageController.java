@@ -89,7 +89,7 @@ public class PageController {
         return "salarySheet";
     }
     
-    @GetMapping("/enter_salary")
+    @GetMapping("/enter_sallary")
     public String enterSallary() {
         return "enterSalary";
     }
