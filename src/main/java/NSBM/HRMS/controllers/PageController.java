@@ -88,6 +88,10 @@ public class PageController {
     public String test() {
         return "test";
     }
+    @GetMapping("/leave")
+    public String leave() {
+        return "leave";
+    }
     
     
 }
