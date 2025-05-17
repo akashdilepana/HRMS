@@ -365,10 +365,10 @@
                                         <div class="page-body">
 
                                             <div class="container">
-<!--                                                <div class="header">
-                                                    <h1 class="title">Salary Statement</h1>
-                                                    <div class="company-name">ABC Corporation Ltd.</div>
-                                                </div>-->
+                                                <!--                                                <div class="header">
+                                                                                                    <h1 class="title">Salary Statement</h1>
+                                                                                                    <div class="company-name">ABC Corporation Ltd.</div>
+                                                                                                </div>-->
 
                                                 <div class="print-hide controls">
                                                     <div class="search-container">
@@ -414,24 +414,43 @@
                                                     </div>
                                                 </div>
 
-                                                <table class="salary-table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="sn-column">#</th>
-                                                            <th class="id-column">Employee ID</th>
-                                                            <th class="name-column">Employee Name</th>
-                                                            <th class="amount-column">Basic Salary</th>
-                                                            <th class="amount-column">Allowances</th>
-                                                            <th class="amount-column">Total Salary</th>
-                                                            <th class="amount-column">Deductions</th>
-                                                            <th class="amount-column">Net Salary</th>
-                                                            <th class="print-hide">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="salaryTableBody">
-                                                        <!-- Rows will be added dynamically -->
-                                                    </tbody>
-                                                </table>
+                                                <div class="row" id="tableSection">
+                                                    <div class="col-lg-10 offset-lg-1 col-xl-12 offset-xl-0 col-12">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <h6>Salary</h6>
+                                                                <div class="card-header-right">
+                                                                    <ul class="list-unstyled card-option">
+                                                                        <li><i class="feather icon-maximize full-card"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-block p-b-0">
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-hover table-bordered m-b-0" id="tbll">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="sn-column">Id</th>
+                                                                                <th class="id-column">Employee No</th>
+                                                                                <th class="name-column">Employee Name</th>
+                                                                                <th class="amount-column">Basic Salary</th>
+                                                                                <th class="amount-column">Allowances</th>
+                                                                                <th class="amount-column">Total Salary</th>
+                                                                                <th class="amount-column">Deductions</th>
+                                                                                <th class="amount-column">Net Salary</th>
+                                                                                <th class="print-hide">Actions</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="salaryTableBody">
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -451,133 +470,47 @@
         <script type="text/javascript" src="files/js/autoNumeric.js"></script>
         <script type="text/javascript" src="files/js/dataTables.responsive.min.js"></script>
         <script>
-                                                            window.onload = function () {
-                                                                // Set current date
-                                                                const today = new Date();
-                                                                document.getElementById('dateInput').valueAsDate = today;
+                                                            $.fn.dataTable.ext.errMode = 'none';
 
-                                                                // Set current month
-                                                                const monthNames = ["January", "February", "March", "April", "May", "June",
-                                                                    "July", "August", "September", "October", "November", "December"];
-                                                                document.getElementById('monthSelect').value = monthNames[today.getMonth()];
+                                                            var dtable = $('#tbll').DataTable({
+                                                                "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                                                                "pageLength": 5,
+                                                                "ordering": true,
+                                                                "autoWidth": false,
+                                                                "processing": true,
+                                                                "serverSide": true,
+                                                                "order": [[0, "desc"]],
+                                                                "searchHighlight": true,
+                                                                "searchDelay": 350,
+                                                                "ajax": {
+                                                                    "url": "salary/getsheet",
+                                                                    "contentType": "application/json",
+                                                                    "type": "POST",
+                                                                    "data": function (d) {
+                                                                        return JSON.stringify(d);
+                                                                    },
+                                                                    error: function (xhr, error, code) {
+                                                                        console.log(xhr);
+                                                                        console.log(code);
+                                                                    }
+                                                                },
+                                                                "columns": [
+                                                                    {"data": "id", className: "text-right", "visible": false},
+                                                                    {"data": "empNo"},
+                                                                    {"data": "empName"},
+                                                                    {"data": "basicSalary"},
+                                                                    {"data": "allowances"},
+                                                                    {"data": "tolSalary"},
+                                                                    {"data": "deduction"},
+                                                                    {"data": "netSalary"}
+                                                                ], "language": {
+                                                                    'loadingRecords': '&nbsp;',
+                                                                    'processing': '<div class="loader2"></div>'
+                                                                }, "createdRow": function (row, data) {
+                                                                    let action_td = document.createElement('td');
 
-                                                                // Add 3 sample rows
-                                                                for (let i = 0; i < 3; i++) {
-                                                                    addRow();
                                                                 }
-
-                                                                // Add search functionality
-                                                                document.getElementById('searchInput').addEventListener('input', function () {
-                                                                    const searchTerm = this.value.toLowerCase();
-                                                                    const rows = document.querySelectorAll('#salaryTableBody tr');
-
-                                                                    rows.forEach(row => {
-                                                                        const name = row.querySelector('.employee-name').value.toLowerCase();
-                                                                        const id = row.querySelector('.employee-id').value.toLowerCase();
-                                                                        if (name.includes(searchTerm) || id.includes(searchTerm)) {
-                                                                            row.style.display = '';
-                                                                        } else {
-                                                                            row.style.display = 'none';
-                                                                        }
-                                                                    });
-                                                                });
-                                                            };
-
-                                                            let rowCount = 0;
-                                                            let lastEmployeeId = 1000; // Starting employee ID
-
-                                                            function addRow() {
-                                                                rowCount++;
-                                                                lastEmployeeId++;
-
-                                                                const tbody = document.getElementById('salaryTableBody');
-                                                                const row = document.createElement('tr');
-
-                                                                // Generate a random employee name for demo purposes
-                                                                const firstNames = ["John", "Sarah", "Michael", "Emily", "David", "Jessica", "Robert", "Jennifer"];
-                                                                const lastNames = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia"];
-                                                                const randomName = ${firstNames[Math.floor(Math.random() * firstNames.length)]}
-            ${lastNames[Math.floor(Math.random() * lastNames.length)]};
-                                                                // Generate a random basic salary between 30000 and 80000
-                                                                const randomSalary = Math.floor(Math.random() * 50000) + 30000;
-
-                                                                // Generate employee ID
-                                                                const employeeId = EMP${lastEmployeeId};
-
-                                                                row.innerHTML = `
-                    <td class="sn-column">${rowCount}</td>
-                    <td><input type="text" class="input-field employee-id" placeholder="Employee ID" value="${employeeId}"></td>
-                    <td><input type="text" class="input-field employee-name" placeholder="Employee Name" value="${randomName}"></td>
-                    <td><input type="number" class="input-field basic-salary" placeholder="0" value="${randomSalary}"></td>
-                    <td><input type="number" class="input-field allowances" placeholder="0" readonly></td>
-                    <td><input type="number" class="input-field total-salary" placeholder="0" readonly></td>
-                    <td><input type="number" class="input-field deductions" placeholder="0" readonly></td>
-                    <td><input type="number" class="input-field net-salary" placeholder="0" readonly></td>
-                    <td class="print-hide">
-                        <button class="btn-icon" onclick="calculateRow(this.parentNode.parentNode)" title="Calculate">
-                            <i class="fas fa-calculator"></i>
-                        </button>
-                        <button class="btn-icon" onclick="deleteRow(this)" title="Delete">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                `;
-
-                                                                const basicInput = row.querySelector('.basic-salary');
-                                                                basicInput.addEventListener('input', () => calculateRow(row));
-
-                                                                tbody.appendChild(row);
-                                                                calculateRow(row); // Calculate the new row immediately
-                                                            }
-
-                                                            function calculateRow(row) {
-                                                                const basicSalary = parseFloat(row.querySelector('.basic-salary').value) || 0;
-
-                                                                // Calculate allowances (example: 50% of basic salary)
-                                                                const allowances = basicSalary * 0.5;
-
-                                                                // Calculate total salary
-                                                                const totalSalary = basicSalary + allowances;
-
-                                                                // Calculate deductions (example: 12% of basic salary)
-                                                                const deductions = basicSalary * 0.12;
-
-                                                                // Calculate net salary
-                                                                const netSalary = totalSalary - deductions;
-
-                                                                row.querySelector('.allowances').value = allowances.toFixed(2);
-                                                                row.querySelector('.total-salary').value = totalSalary.toFixed(2);
-                                                                row.querySelector('.deductions').value = deductions.toFixed(2);
-                                                                row.querySelector('.net-salary').value = netSalary.toFixed(2);
-                                                            }
-
-                                                            function calculateAll() {
-                                                                const rows = document.querySelectorAll('#salaryTableBody tr');
-                                                                rows.forEach(row => calculateRow(row));
-
-                                                                // Show a temporary success message
-                                                                const originalText = document.querySelector('.btn-success i').nextSibling.textContent;
-                                                                const successBtn = document.querySelector('.btn-success');
-                                                                successBtn.innerHTML = '<i class="fas fa-check"></i> Calculated!';
-
-                                                                setTimeout(() => {
-                                                                    successBtn.innerHTML = '<i class="fas fa-calculator"></i> ' + originalText;
-                                                                }, 2000);
-                                                            }
-
-                                                            function deleteRow(button) {
-                                                                const row = button.parentNode.parentNode;
-                                                                row.parentNode.removeChild(row);
-
-                                                                // Update serial numbers
-                                                                const rows = document.querySelectorAll('#salaryTableBody tr');
-                                                                rows.forEach((row, index) => {
-                                                                    row.cells[0].textContent = index + 1;
-                                                                });
-
-                                                                rowCount = rows.length;
-                                                            }
-
+                                                            });
         </script>
     </body>
 </html>
