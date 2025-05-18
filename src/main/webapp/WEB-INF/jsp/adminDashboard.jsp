@@ -280,7 +280,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="section-box" onclick="location.href='profile.jsp'">
+                                                        <div class="section-box" onclick="location.href='index'">
                                                             <i class="fa fa-male"></i><br>
                                                             <strong>Profile</strong>
                                                         </div>

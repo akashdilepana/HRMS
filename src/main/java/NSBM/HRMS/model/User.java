@@ -38,12 +38,15 @@ public class User {
     private String name;
     private String email;
     private String address;
-    private String mobile;
-    private String designation;
-    private String empNo;
+    private Integer mobile;
+//    private Integer designation;
+    private Integer empNo;
     private AggregateReference<UserType, Integer> userType;
     @Transient
     private String userTypeName;
+    private AggregateReference<UserDesignation, Integer>designation;
+//    @Transient
+//    private String userDesignationName;
     @CreatedBy
     private Integer entBy;
     @CreatedDate

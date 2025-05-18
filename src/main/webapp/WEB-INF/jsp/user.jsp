@@ -327,10 +327,35 @@
                     Swal.fire("Empty Username!", "Please Enter a Valid Username!", "warning");
                     return;
                 }
+//                if ($('#add').val().trim() === '') {
+//                    Swal.fire("Empty addresss!", "Please Enter Address!", "warning");
+//                    return;
+//                }
+//                if ($('#email').val().trim() === '') {
+//                    Swal.fire("Empty Email!", "Please Enter valid Email!", "warning");
+//                    return;
+//                }
+//                if ($('#tpno').val() === '') {
+//                    Swal.fire("Empty contact!", "Please Enter valid mobile number!", "warning");
+//                    return;
+//                }
+//                if ($('#pw').val().trim() === '') {
+//                    Swal.fire("Empty password!", "Please Enter valid mobile password!", "warning");
+//                    return;
+//                }
+//                if ($('#emp').val() === '') {
+//                    Swal.fire("Empty employeeNumber!", "Please Enter Employee number!", "warning");
+//                    return;
+//                }
                 if ($('#user_type').val() === null) {
                     Swal.fire("UserType not Selected!", "Please Select a UserType!", "warning");
                     return;
                 }
+//                if ($('#user_designation').val() === null) {
+//                    Swal.fire("UserDesignation not Selected!", "Please Select a UserDesignation!", "warning");
+//                    return;
+//                }
+                
 
                 let mode = $('#saveBtn').data('mode');
 
@@ -341,6 +366,12 @@
                 formData.append('name', $('#name').val().trim());
                 formData.append('username', $('#username').val().trim());
                 formData.append('type', $('#user_type').val());
+                formData.append('address', $('#add').val().trim());
+                formData.append('tpno', $('#tp').val());
+                formData.append('email', $('#email').val().trim());
+                formData.append('password', $('#pw').val().trim());
+                formData.append('empno', $('#emp').val());
+                formData.append('designation', $('#user_designation').val());
 
                 Swal.fire({
                     title: 'Are you sure?',
