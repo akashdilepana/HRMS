@@ -298,7 +298,7 @@
                                                             <h5>Welcome Aboard</h5>
                                                             <br>
                                                             <div id="newEmpWelcome">
-                                                                show new employee name and designation
+                                                                <!-- Show new employee -->
 
                                                             </div>
                                                         </div>

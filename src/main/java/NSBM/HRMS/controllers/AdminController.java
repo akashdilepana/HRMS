@@ -70,15 +70,15 @@ public class AdminController {
     }
 
     @PostMapping("/save-user")
-    public ResponseEntity<CommonResponse> saveUser(@RequestParam String username, @RequestParam String name, @RequestParam Integer type) throws Exception {
-        service.saveUser(name, username, type);
+    public ResponseEntity<CommonResponse> saveUser(@RequestParam String username, @RequestParam String name, @RequestParam Integer type,@RequestParam String address,@RequestParam Integer tpno,@RequestParam String email,@RequestParam String password,@RequestParam Integer empno,@RequestParam Integer designation ) throws Exception {
+        service.saveUser(name, username, type,address,tpno,email,password,empno,designation);
         CommonResponse response = new CommonResponse("Success!", 200);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/update-user")
-    public ResponseEntity<CommonResponse> saveUser(@RequestParam Integer id, @RequestParam String username, @RequestParam String name, @RequestParam Integer type) throws Exception {
-        service.updateUser(id, name, username, type);
+    public ResponseEntity<CommonResponse> saveUser(@RequestParam Integer id, @RequestParam String username, @RequestParam String name, @RequestParam Integer type,@RequestParam String address,@RequestParam Integer tpno,@RequestParam String email,@RequestParam String password,@RequestParam Integer empno,@RequestParam Integer designation) throws Exception {
+        service.updateUser(id, name, username, type,address,tpno,email,password,empno,designation);
         CommonResponse response = new CommonResponse("Success!", 200);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

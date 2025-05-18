@@ -111,21 +111,33 @@ public class AdminService {
 
     }
 
-    public User saveUser(String name, String username, Integer userType) throws Exception {
+    public User saveUser(String name, String username, Integer userType,String address,Integer tpno,String email,String password,Integer empno,Integer designation) throws Exception {
         User user = new User();
         user.setUsername(username);
         user.setName(name);
         user.setUserType(AggregateReference.to(userType));
+        user.setAddress(address);
+        user.setMobile(tpno);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setEmpNo(empno);
+        user.setDesignation(AggregateReference.to(designation));
         user.setStatus("active");
         user = userRepo.save(user);
         return user;
     }
 
-    public User updateUser(Integer id, String name, String username, Integer userType) throws Exception {
+    public User updateUser(Integer id, String name, String username, Integer userType,String address,Integer tpno,String email,String password,Integer empno,Integer designation) throws Exception {
         User user = userRepo.findById(id).get();
         user.setUsername(username);
         user.setName(name);
         user.setUserType(AggregateReference.to(userType));
+        user.setAddress(address);
+        user.setMobile(tpno);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setEmpNo(empno);
+        user.setDesignation(AggregateReference.to(designation));
         user = userRepo.save(user);
         return user;
     }
