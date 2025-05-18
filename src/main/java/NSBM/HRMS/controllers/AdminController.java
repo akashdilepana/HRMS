@@ -13,6 +13,9 @@ import NSBM.HRMS.dto.UserTypeDataTable;
 import NSBM.HRMS.model.Salary;
 import NSBM.HRMS.service.AdminService;
 import NSBM.HRMS.model.User;
+import jakarta.servlet.http.HttpSession;
+import java.time.Year;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -84,6 +87,13 @@ public class AdminController {
     @PostMapping("/save-salary")
     public ResponseEntity<CommonResponse> saveSalary(@RequestParam Integer basic, @RequestParam Integer allowance, @RequestParam Double total, @RequestParam Integer deduct, @RequestParam Double net, @RequestParam Integer emp) throws Exception {
         service.saveSalary(basic, allowance, total, deduct, net, emp);
+        CommonResponse response = new CommonResponse("Success!", 200);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/save-leave")
+    public ResponseEntity<CommonResponse> saveleave(HttpSession session,@RequestParam String leaveYear, @RequestParam String leaveType, @RequestParam String from, @RequestParam String to, @RequestParam String comment, @RequestParam Integer emp) throws Exception {
+        service.saveLeave(session,leaveYear, leaveType, from, to, comment, emp);
         CommonResponse response = new CommonResponse("Success!", 200);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

@@ -11,20 +11,27 @@ import NSBM.HRMS.dto.GetPagesDTO;
 import NSBM.HRMS.dto.SlimSelectDTO;
 import NSBM.HRMS.dto.UserDataTable;
 import NSBM.HRMS.dto.UserTypeDataTable;
+import NSBM.HRMS.model.Leave;
 import NSBM.HRMS.model.Salary;
 import NSBM.HRMS.repo.PageRepo;
 import NSBM.HRMS.model.UserType;
 import NSBM.HRMS.model.User;
+import NSBM.HRMS.repo.LeaveRepo;
 import NSBM.HRMS.repo.SalaryRepo;
 import NSBM.HRMS.repo.UserDesignationRepo;
 import NSBM.HRMS.repo.UserRepo;
 import NSBM.HRMS.repo.UserTypeRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpSession;
+import java.time.Year;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -44,7 +51,10 @@ public class AdminService {
 
     @Autowired
     SalaryRepo SalaryRepo;
-    
+
+    @Autowired
+    LeaveRepo LeaveRepo;
+
     @Autowired
     UserDesignationRepo userDesignationRepo;
 
@@ -64,7 +74,7 @@ public class AdminService {
         user.setUserTypeName(utype.getName());
         return user;
     }
-    
+
     public Salary getSalary(Integer id) throws Exception {
         Salary s1 = SalaryRepo.findById(id).get();
 //        User  u1 = userRepo.findById(s1.getEmpId().get()).get();
@@ -123,7 +133,7 @@ public class AdminService {
 
     }
 
-    public User saveUser(String name, String username, Integer userType,String address,Integer tpno,String email,String password,Integer empno,Integer designation) throws Exception {
+    public User saveUser(String name, String username, Integer userType, String address, Integer tpno, String email, String password, Integer empno, Integer designation) throws Exception {
         User user = new User();
         user.setUsername(username);
         user.setName(name);
@@ -150,6 +160,23 @@ public class AdminService {
         s1 = SalaryRepo.save(s1);
         return s1;
     }
+
+    public Leave saveLeave(HttpSession session, String leaveYear, String leaveType, String from, String to, String comment, Integer emp) throws Exception {
+        Integer uid = (Integer) session.getAttribute("uid");
+        
+        Leave leave = new Leave();
+        leave.setLeaveType(leaveType);
+        leave.setLeaveYear(leaveYear);
+        leave.setFromDate(from);
+        leave.setToDate(to);
+        leave.setComments(comment);
+        leave.setEmpId(uid);
+        leave.setApprover(emp);
+
+        leave = LeaveRepo.save(leave);
+        return leave;
+    }
+
     public Salary updateSalary(Integer basic, Integer allowance, Double total, Integer deduct, Double net, Integer emp) throws Exception {
         Salary s1 = new Salary();
         s1.setAllowances(allowance);
@@ -162,7 +189,7 @@ public class AdminService {
         return s1;
     }
 
-    public User updateUser(Integer id, String name, String username, Integer userType,String address,Integer tpno,String email,String password,Integer empno,Integer designation) throws Exception {
+    public User updateUser(Integer id, String name, String username, Integer userType, String address, Integer tpno, String email, String password, Integer empno, Integer designation) throws Exception {
 
         User user = userRepo.findById(id).get();
         user.setUsername(username);
@@ -213,11 +240,11 @@ public class AdminService {
     public Iterable<SlimSelectDTO> getUserTypeIdAndName(String search) {
         return userTypeRepo.getIdAndName("%" + search.trim() + "%");
     }
-    
+
     public Iterable<SlimSelectDTO> getEmpIdAndName(String search) {
         return userRepo.getIdAndName("%" + search.trim() + "%");
     }
-    
+
     public Iterable<SlimSelectDTO> getUserDesignationIdAndName(String search) {
         return userDesignationRepo.getIdAndName("%" + search.trim() + "%");
     }
