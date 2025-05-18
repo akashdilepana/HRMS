@@ -10,6 +10,7 @@ package NSBM.HRMS.controllers;
  */
 import NSBM.HRMS.service.LogoutService;
 import NSBM.HRMS.service.PageService;
+import NSBM.HRMS.service.SalaryService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,9 @@ public class PageController {
 
     @Autowired
     LogoutService logout;
+    
+    @Autowired
+    SalaryService sal;
 
     @RequestMapping("/logout")
     @ResponseBody
@@ -68,26 +72,41 @@ public class PageController {
     public String users() {
         return "user";
     }
-    
+
     @GetMapping("/user_type")
     public String userType() {
         return "userType";
     }
-    
+
     @GetMapping("/att")
     public String attendance() {
         return "attendance";
     }
-    
-    @GetMapping("/sallary")
-    public String sallary() {
-        return "sallary";
+
+    @GetMapping("/salarySlip")
+    public String sallarySlip() {
+//        Integer uid = (Integer) session.getAttribute("uid");
+//        sal.getEmpSalary(uid);
+        return "salary";
     }
-    
+
+    @GetMapping("/salarySheet")
+    public String sallarySheet() {
+        return "salarySheet";
+    }
+
+    @GetMapping("/enter_salary")
+    public String enterSalary() {
+        return "enterSalary";
+    }
+
     @GetMapping("/test")
     public String test() {
         return "test";
     }
-    
-    
+
+    @GetMapping("/leave")
+    public String leave() {
+        return "leave";
+    }
 }
