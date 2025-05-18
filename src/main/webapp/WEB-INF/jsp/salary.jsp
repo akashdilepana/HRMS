@@ -16,13 +16,13 @@
     </head>
     <body>
         <style>
-/*            body {
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                background: #f0f4f8;
-                margin: 0;
-                padding: 20px;
-                color: #333;
-            }*/
+            /*            body {
+                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                            background: #f0f4f8;
+                            margin: 0;
+                            padding: 20px;
+                            color: #333;
+                        }*/
             .container {
                 background: white;
                 max-width: 900px;
@@ -150,11 +150,11 @@
                                                 <div class="header">
                                                     <img src="employee_avatar.png" alt="Employee Photo">
                                                     <div>
-                                                        <h2>Tharushi Senanayake</h2>
-                                                        <p>ID: 1001 | Director</p>
+                                                        <h2 id="empName">Tharushi Senanayake</h2>
+                                                        <p id="empNo">ID: 1001 | Director</p>
                                                         <p>Tax ID (TIN): 456789123V</p>
                                                         <div class="tags">
-                                                            <span>Management</span>
+                                                            <span id="designation">Management</span>
                                                             <span>Full time</span>
                                                         </div>
                                                     </div>
@@ -199,45 +199,38 @@
                                                     <tbody>
                                                         <tr>
                                                             <td>Basic Pay</td>
-                                                            <td>45,300.00</td>
-                                                            <td>Professional Tax</td>
-                                                            <td>200.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Dearness Allowance</td>
-                                                            <td>11,325.00</td>
-                                                            <td>Provident Fund</td>
-                                                            <td>1,800.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>House Rent Allowance</td>
-                                                            <td>18,875.00</td>
+                                                            <td id="basic">45,300.00</td>
                                                             <td>Other Deduction</td>
-                                                            <td>5,931.00</td>
+                                                            <td id="deduction">5,931.00</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Other Allowance</td>
+                                                            <td id="allowances">11,325.00</td>
+                                                            
                                                         </tr>
                                                         <tr style="font-weight: bold; background: #f1f8e9;">
                                                             <td>Total Earnings</td>
-                                                            <td>75,500.00</td>
+                                                            <td id="tol">75,500.00</td>
                                                             <td>Total Deductions</td>
-                                                            <td>7,931.00</td>
+                                                            <td id="tolDeduction">7,931.00</td>
                                                         </tr>
                                                         <tr style="font-weight: bold; background: #d0f0c0;">
                                                             <td colspan="2">Net Pay (Rounded)</td>
-                                                            <td colspan="2">67,569.00</td>
+                                                            <td colspan="2" id="net">67,569.00</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
 
                                                 <!-- Additional Notes -->
-<!--                                                <div class="footer">
-                                                    <p><strong>Notes:</strong></p>
-                                                    <ul>
-                                                        <li>Net pay has been rounded to the nearest whole number.</li>
-                                                        <li>This salary slip is computer-generated and does not require a signature.</li>
-                                                        <li>Taxes and deductions are as per government rules applicable for the period.</li>
-                                                        <li>Bank account has been credited on pay date.</li>
-                                                    </ul>
-                                                </div>-->
+                                                <!--                                                <div class="footer">
+                                                                                                    <p><strong>Notes:</strong></p>
+                                                                                                    <ul>
+                                                                                                        <li>Net pay has been rounded to the nearest whole number.</li>
+                                                                                                        <li>This salary slip is computer-generated and does not require a signature.</li>
+                                                                                                        <li>Taxes and deductions are as per government rules applicable for the period.</li>
+                                                                                                        <li>Bank account has been credited on pay date.</li>
+                                                                                                    </ul>
+                                                                                                </div>-->
 
                                                 <!-- QR Code -->
                                                 <div class="qr">
@@ -265,6 +258,36 @@
         <script type="text/javascript" src="files/js/func.js"></script>
         <script type="text/javascript" src="files/js/autoNumeric.js"></script>
         <script type="text/javascript" src="files/js/dataTables.responsive.min.js"></script>
+        <script>
+                                                    fetch('salary/empSalary', {
+                                                        method: 'GET',
+                                                        credentials: 'include' // ✅ this tells fetch to send cookies/session
+                                                    })
+                                                            .then(response => {
+                                                                if (!response.ok) {
+                                                                    throw new Error("Unauthorized or error occurred");
+                                                                }
+                                                                return response.json();
+                                                            })
+                                                            .then(data => {
+                                                                const salary = data[0];
+                                                                document.getElementById('empName').textContent = salary.empName;
+                                                                document.getElementById('empNo').textContent = salary.empNo;
+                                                                document.getElementById('designation').textContent = salary.designation;
+                                                                document.getElementById('basic').textContent = salary.basicSalary;
+                                                                document.getElementById('deduction').textContent = salary.deduction;
+                                                                document.getElementById('allowances').textContent = salary.allowances;
+                                                                document.getElementById('tol').textContent = salary.tolSalary;
+                                                                document.getElementById('tolDeduction').textContent = salary.deduction;
+                                                                document.getElementById('net').textContent = salary.netSalary;
+                                                                console.log("Salary data:", data);
+                                                            })
+                                                            .catch(error => {
+                                                                console.error("Fetch error:", error);
+                                                            });
+
+
+        </script>
 
 
     </body>

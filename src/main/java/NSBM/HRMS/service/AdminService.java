@@ -11,9 +11,11 @@ import NSBM.HRMS.dto.GetPagesDTO;
 import NSBM.HRMS.dto.SlimSelectDTO;
 import NSBM.HRMS.dto.UserDataTable;
 import NSBM.HRMS.dto.UserTypeDataTable;
+import NSBM.HRMS.model.Salary;
 import NSBM.HRMS.repo.PageRepo;
 import NSBM.HRMS.model.UserType;
 import NSBM.HRMS.model.User;
+import NSBM.HRMS.repo.SalaryRepo;
 import NSBM.HRMS.repo.UserDesignationRepo;
 import NSBM.HRMS.repo.UserRepo;
 import NSBM.HRMS.repo.UserTypeRepo;
@@ -39,6 +41,9 @@ public class AdminService {
 
     @Autowired
     UserRepo userRepo;
+
+    @Autowired
+    SalaryRepo SalaryRepo;
     
     @Autowired
     UserDesignationRepo userDesignationRepo;
@@ -58,6 +63,13 @@ public class AdminService {
         UserType utype = userTypeRepo.findById(user.getUserType().getId()).get();
         user.setUserTypeName(utype.getName());
         return user;
+    }
+    
+    public Salary getSalary(Integer id) throws Exception {
+        Salary s1 = SalaryRepo.findById(id).get();
+//        User  u1 = userRepo.findById(s1.getEmpId().get()).get();
+//        s1.setEmpName(u1.getName());
+        return s1;
     }
 
     public DataTablesResponse<UserTypeDataTable> getUserType(DataTableRequest param) throws Exception {
@@ -121,6 +133,29 @@ public class AdminService {
         return user;
     }
 
+    public Salary saveSalary(Integer basic, Integer allowance, Double total, Integer deduct, Double net, Integer emp) throws Exception {
+        Salary s1 = new Salary();
+        s1.setAllowances(allowance);
+        s1.setBasicSalary(basic);
+        s1.setDeduction(deduct);
+        s1.setEmpId(emp);
+        s1.setNetSalary(net);
+        s1.setTolSalary(total);
+        s1 = SalaryRepo.save(s1);
+        return s1;
+    }
+    public Salary updateSalary(Integer basic, Integer allowance, Double total, Integer deduct, Double net, Integer emp) throws Exception {
+        Salary s1 = new Salary();
+        s1.setAllowances(allowance);
+        s1.setBasicSalary(basic);
+        s1.setDeduction(deduct);
+        s1.setEmpId(emp);
+        s1.setNetSalary(net);
+        s1.setTolSalary(total);
+        s1 = SalaryRepo.save(s1);
+        return s1;
+    }
+
     public User updateUser(Integer id, String name, String username, Integer userType) throws Exception {
         User user = userRepo.findById(id).get();
         user.setUsername(username);
@@ -165,6 +200,11 @@ public class AdminService {
     public Iterable<SlimSelectDTO> getUserTypeIdAndName(String search) {
         return userTypeRepo.getIdAndName("%" + search.trim() + "%");
     }
+    
+    public Iterable<SlimSelectDTO> getEmpIdAndName(String search) {
+        return userRepo.getIdAndName("%" + search.trim() + "%");
+    }
+    
     public Iterable<SlimSelectDTO> getUserDesignationIdAndName(String search) {
         return userDesignationRepo.getIdAndName("%" + search.trim() + "%");
     }

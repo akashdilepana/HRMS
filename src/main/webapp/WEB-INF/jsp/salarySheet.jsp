@@ -413,46 +413,115 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <div class="row" id="tableSection">
-                                                    <div class="col-lg-10 offset-lg-1 col-xl-12 offset-xl-0 col-12">
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                                <h6>Salary</h6>
-                                                                <div class="card-header-right">
-                                                                    <ul class="list-unstyled card-option">
-                                                                        <li><i class="feather icon-maximize full-card"></i></li>
-                                                                    </ul>
-                                                                </div>
+                                            </div>
+                                            <div class="row" id="tableSection">
+                                                <div class="col-lg-10 offset-lg-1 col-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h6>Salary</h6>
+                                                            <div class="card-header-right">
+                                                                <ul class="list-unstyled card-option">
+                                                                    <li><i class="feather icon-maximize full-card"></i></li>
+                                                                </ul>
                                                             </div>
-                                                            <div class="card-block p-b-0">
-                                                                <div class="table-responsive">
-                                                                    <table class="table table-hover table-bordered m-b-0" id="tbll">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th class="sn-column">Id</th>
-                                                                                <th class="id-column">Employee No</th>
-                                                                                <th class="name-column">Employee Name</th>
-                                                                                <th class="amount-column">Basic Salary</th>
-                                                                                <th class="amount-column">Allowances</th>
-                                                                                <th class="amount-column">Total Salary</th>
-                                                                                <th class="amount-column">Deductions</th>
-                                                                                <th class="amount-column">Net Salary</th>
-                                                                                <th class="print-hide">Actions</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody id="salaryTableBody">
+                                                        </div>
+                                                        <div class="card-block p-b-0">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-hover table-bordered m-b-0" id="tbll">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th class="sn-column">Id</th>
+                                                                            <th class="id-column">Employee No</th>
+                                                                            <th class="name-column">Employee Name</th>
+                                                                            <th class="amount-column">Basic Salary</th>
+                                                                            <th class="amount-column">Allowances</th>
+                                                                            <th class="amount-column">Total Salary</th>
+                                                                            <th class="amount-column">Deductions</th>
+                                                                            <th class="amount-column">Net Salary</th>
+                                                                            <th style="width:1px;">Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="salaryTableBody">
 
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
-                                                        
+                                                        </div>
+                                                        <div class="card-footer">
+                                                            <div class="text-right">
+                                                                <button id="addSalaryBtn" class="btn btn-sm waves-effect waves-light btn-danger"><i class="icon feather icon-plus"></i>Add Salary</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
+                                            <div class="row" id="formSection" style="display: none">
+                                                <div class="col-lg-8 offset-lg-2 col-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h6>Add Salary</h6>
+                                                            <div class="card-header-right">
+                                                                <ul class="list-unstyled card-option">
+                                                                    <li><i class="feather icon-x cls-card"></i></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-block p-b-0">
+                                                            <div class="row">
+                                                                <div class="col-12 col-lg-12">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="user_type">Select Employee<span class="text-danger">*</span></label>
+                                                                                <select id="emp" name="emp" class="" required autocomplete="off">
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-lg-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="BasicSalary">Basic Salary<span class="text-danger">*</span></label>
+                                                                                <input id="basic"  type="number" name="basic" class="form-control" oninput="calculateSalary()" required autocomplete="off">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="address">Allowances<span class="text-danger">*</span></label>
+                                                                                <input id="allowance" type="number" name="allowance" class="form-control" oninput="calculateSalary()" required autocomplete="off">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="email">Total Salary<span class="text-danger">*</span></label>
+                                                                                <input id="total" type="number" name="total" class="form-control"  readonly>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="deduct">Deductions<span class="text-danger">*</span></label>
+                                                                                <input id="deduct" type="number" name="deduct" class="form-control" oninput="calculateSalary()" required autocomplete="off">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="net">Net Salary<span class="text-danger">*</span></label>
+                                                                                <input id="net" type="number" name="net" class="form-control"  readonly>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-footer">
+                                                            <div class="text-right">
+                                                                <button id="saveBtn" class="btn btn-sm waves-effect waves-light btn-primary"><i class="icon feather icon-save"></i>Save</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -470,8 +539,35 @@
         <script type="text/javascript" src="files/js/autoNumeric.js"></script>
         <script type="text/javascript" src="files/js/dataTables.responsive.min.js"></script>
         <script>
-                                                            $.fn.dataTable.ext.errMode = 'none';
+                                                            $('#addSalaryBtn').click(function () {
+                                                                $('#saveBtn').data('mode', 'save');
+                                                                $('#saveBtn').html('<i class="icon feather icon-save"></i>Save');
+//                clearForm();
+                                                                $('#tableSection').hide();
+                                                                $('#formSection').fadeIn();
+                                                            });
+                                                            $('.cls-card').click(function () {
+                                                                $('#formSection').hide();
+                                                                $('#tableSection').fadeIn();
+                                                            });
+                                                            var emp = new SlimSelect({
+                                                                select: '#emp',
+                                                                placeholder: "Select a Emplyoee",
+                                                                searchHighlight: true,
 
+                                                                ajax: function (search, callback) {
+                                                                    fetch('admin/search-emp', {
+                                                                        method: 'POST',
+                                                                        body: new URLSearchParams({search: search || ''})
+                                                                    }).then(res => res.json()).then((data) => {
+                                                                        callback(data);
+                                                                    });
+                                                                },
+                                                                allowDeselect: true,
+                                                                deselectLabel: '<span class="red">✖</span>'
+                                                            });
+
+                                                            $.fn.dataTable.ext.errMode = 'none';
                                                             var dtable = $('#tbll').DataTable({
                                                                 "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
                                                                 "pageLength": 5,
@@ -508,9 +604,153 @@
                                                                     'processing': '<div class="loader2"></div>'
                                                                 }, "createdRow": function (row, data) {
                                                                     let action_td = document.createElement('td');
-
+                                                                    $(action_td).addClass('text-center');
+                                                                    $(action_td).append('<a href="javascript:void(0)" class="editrec"><i class="icon feather icon-edit f-w-600 f-16 m-r-10 text-c-green"></i></a>');
+                                                                    $(row).append(action_td);
+                                                                    setTableStatus($(row).find('td').eq(4));
+                                                                    $(row).data('id', data['id']);
                                                                 }
                                                             });
+                                                            $(document).on('click', '.editrec', function () {
+                                                                loadDiv($('#tableSection'));
+                                                                let id = $(this).parents('tr').data('id');
+                                                                fetch('admin/salary/' + id).then(resp => resp.json())
+                                                                        .then((data) => {
+                                                                            clearForm();
+
+                                                                            $('#basic').val(data.basicSalary);
+                                                                            $('#allowance').val(data.allowances);
+                                                                            $('#deduct').val(data.deduction);
+                                                                            $('#net').val(data.netSalary);
+                                                                            $('#total').val(data.tolSalary);
+//                                                                            if (data.empId) {
+//                                                                                emp.setData([{value: data.emp.id, text: data.userTypeName}]);
+//                                                                                emp.set(data.emp.id);
+//                                                                            }
+                                                                            $('#saveBtn').data('mode', 'update');
+                                                                            $('#saveBtn').html('<i class="icon feather icon-save"></i>Update');
+                                                                            $('#saveBtn').data('id', id);
+                                                                            $('#formSection').fadeIn();
+                                                                            $('#tableSection').hide();
+                                                                            finishLoadDiv($('#tableSection'));
+                                                                        });
+                                                            });
+                                                            $('#saveBtn').click(function () {
+                                                                if ($('#basic').val().trim() === '') {
+                                                                    Swal.fire("Empty Basic!", "Please enter a valid salary!", "warning");
+                                                                    return;
+                                                                }
+
+                                                                if (!$('#emp').val()) {
+                                                                    Swal.fire("Employee not selected!", "Please select an employee!", "warning");
+                                                                    return;
+                                                                }
+
+                                                                let mode = $('#saveBtn').data('mode');
+                                                                const formData = new FormData();
+                                                                if (mode === 'update') {
+                                                                    formData.append('id', $('#saveBtn').data('id'));
+                                                                }
+
+                                                                formData.append('basic', $('#basic').val());
+                                                                formData.append('allowance', $('#allowance').val());
+                                                                formData.append('total', $('#total').val());
+                                                                formData.append('deduct', $('#deduct').val());
+                                                                formData.append('net', $('#net').val());
+                                                                formData.append('emp', $('#emp').val());
+                                                                console.log(FormData);
+                                                                Swal.fire({
+                                                                    title: 'Are you sure?',
+                                                                    text: "Salary will be " + (mode === 'update' ? 'updated' : 'saved') + "!",
+                                                                    icon: 'warning',
+                                                                    showCancelButton: true,
+                                                                    confirmButtonColor: '#3085d6',
+                                                                    cancelButtonColor: '#d33',
+                                                                    confirmButtonText: 'Yes, Continue!',
+                                                                    showLoaderOnConfirm: true,
+                                                                    preConfirm: () => {
+                                                                        return fetch('admin/' + mode + '-salary', {
+                                                                            method: 'POST',
+                                                                            body: formData
+                                                                        }).then(response => {
+                                                                            if (!response.ok)
+                                                                                throw new Error(response.statusText);
+                                                                            return response.json();
+                                                                        }).catch(error => {
+                                                                            Swal.showValidationMessage('Request failed: ' + error);
+                                                                        });
+                                                                    },
+                                                                    allowOutsideClick: () => !Swal.isLoading()
+                                                                }).then((result) => {
+                                                                    if (result.value) {
+                                                                        if (result.value.status !== 200) {
+                                                                            Swal.fire('Error!', result.value.msg, 'error');
+                                                                        } else {
+                                                                            Swal.fire('Successful!', 'Salary has been ' + (mode === 'update' ? 'updated' : 'saved') + '.', 'success');
+                                                                            dtable.ajax.reload();
+                                                                            $('#formSection').hide();
+                                                                            $('#tableSection').fadeIn();
+                                                                        }
+                                                                    }
+                                                                });
+                                                            });
+
+
+                                                            function calculateSalary() {
+                                                                let basic = parseFloat(document.getElementById("basic").value) || 0;
+                                                                let allowance = parseFloat(document.getElementById("allowance").value) || 0;
+                                                                let deduct = parseFloat(document.getElementById("deduct").value) || 0;
+
+                                                                let total = basic + allowance;
+                                                                let net = total - deduct;
+
+                                                                document.getElementById("total").value = total.toFixed(2);
+                                                                document.getElementById("net").value = net.toFixed(2);
+                                                            }
+
+                                                            function fetchEmployeeDetails() {
+                                                                const empId = document.getElementById("searchEmpId").value.trim();
+                                                                if (empId === "") {
+                                                                    alert("Please enter an Employee ID");
+                                                                    return;
+                                                                }
+
+                                                                // Example static data (replace with real AJAX call or DB data)
+                                                                const dummyDatabase = {
+                                                                    "101": "Kamal Perera",
+                                                                    "102": "Nimal Silva",
+                                                                    "103": "Sunil Fernando"
+                                                                };
+
+                                                                const nameField = document.getElementById("employeeName");
+                                                                const detailsDiv = document.getElementById("employeeDetails");
+
+                                                                if (dummyDatabase[empId]) {
+                                                                    nameField.value = dummyDatabase[empId];
+                                                                    nameField.readOnly = true;
+                                                                    detailsDiv.style.display = "block";
+                                                                } else {
+                                                                    alert("Employee not found!");
+                                                                    detailsDiv.style.display = "none";
+                                                                }
+                                                            }
+
+                                                            function enableEdit() {
+                                                                document.getElementById("employeeName").readOnly = false;
+                                                                document.getElementById("employeeName").focus();
+                                                            }
+                                                            function clearForm() {
+                                                                $('#formSection').find('input[type!=search]').val('');
+                                                                $('#formSection').find('select').each(function () {
+                                                                    if ($(this).data('select')) {
+                                                                        if ($(this).data('select').ajax) {
+                                                                            $(this).data('select').data.data = [];
+                                                                        }
+                                                                        $(this).data('select').set('');
+                                                                    }
+                                                                });
+                                                            }
+
         </script>
     </body>
 </html>

@@ -6,10 +6,17 @@ package NSBM.HRMS.controllers;
 
 import NSBM.HRMS.datatable.DataTableRequest;
 import NSBM.HRMS.datatable.DataTablesResponse;
+import NSBM.HRMS.dto.EmpSalaryDTO;
 import NSBM.HRMS.dto.SalaryDataTable;
 import NSBM.HRMS.dto.UserDataTable;
+import NSBM.HRMS.model.Salary;
 import NSBM.HRMS.service.SalaryService;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,4 +37,22 @@ public class SalaryController {
     public DataTablesResponse<SalaryDataTable> getSalarys(@RequestBody DataTableRequest param) throws Exception {
         return service.getSalary(param);
     }
+
+    @GetMapping("/empSalary")
+    public ResponseEntity<?> getEmployeeSalary(HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("uid"); // ✅ lowercase "uid"
+
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not logged in");
+        }
+
+        List<EmpSalaryDTO> salaryList = service.getSalaries(userId);
+        return ResponseEntity.ok(salaryList);
+    }
+    
+//        public Iterable<NewEmpDTO> showNewEmp() {
+//
+//        return repo.getNewEmp();
+//    }
+
 }

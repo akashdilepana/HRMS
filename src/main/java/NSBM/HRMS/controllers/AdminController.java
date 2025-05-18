@@ -10,6 +10,7 @@ import NSBM.HRMS.dto.GetPagesDTO;
 import NSBM.HRMS.dto.SlimSelectDTO;
 import NSBM.HRMS.dto.UserDataTable;
 import NSBM.HRMS.dto.UserTypeDataTable;
+import NSBM.HRMS.model.Salary;
 import NSBM.HRMS.service.AdminService;
 import NSBM.HRMS.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,10 @@ public class AdminController {
     @GetMapping("/user/{id}")
     public User getUser(@PathVariable Integer id) throws Exception {
         return service.getUser(id);
+    }
+    @GetMapping("/salary/{id}")
+    public Salary getSalary(@PathVariable Integer id) throws Exception {
+        return service.getSalary(id);
     }
 
     @PostMapping("/userType")
@@ -76,6 +81,20 @@ public class AdminController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @PostMapping("/save-salary")
+    public ResponseEntity<CommonResponse> saveSalary(@RequestParam Integer basic, @RequestParam Integer allowance, @RequestParam Double total, @RequestParam Integer deduct, @RequestParam Double net, @RequestParam Integer emp) throws Exception {
+        service.saveSalary(basic, allowance, total, deduct, net, emp);
+        CommonResponse response = new CommonResponse("Success!", 200);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/update-salary")
+    public ResponseEntity<CommonResponse> updateSalary(@RequestParam Integer basic, @RequestParam Integer allowance, @RequestParam Double total, @RequestParam Integer deduct, @RequestParam Double net, @RequestParam Integer emp) throws Exception {
+        service.updateSalary(basic, allowance, total, deduct, net, emp);
+        CommonResponse response = new CommonResponse("Success!", 200);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    
     @PostMapping("/update-user")
     public ResponseEntity<CommonResponse> saveUser(@RequestParam Integer id, @RequestParam String username, @RequestParam String name, @RequestParam Integer type) throws Exception {
         service.updateUser(id, name, username, type);
@@ -125,6 +144,12 @@ public class AdminController {
     public Iterable<SlimSelectDTO> searchUserTypes(@RequestParam String search) throws Exception {
         return service.getUserTypeIdAndName(search);
     }
+    
+    @PostMapping("/search-emp")
+    public Iterable<SlimSelectDTO> searchEmp(@RequestParam String search) throws Exception {
+        return service.getEmpIdAndName(search);
+    }
+    
     @PostMapping("/search-user-designation")
     public Iterable<SlimSelectDTO> searchUserDesignation(@RequestParam String search) throws Exception {
         return service.getUserDesignationIdAndName(search);
